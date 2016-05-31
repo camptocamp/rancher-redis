@@ -1,0 +1,12 @@
+te]
+src = "redis.yaml.template.tmpl"
+dest = "/redis/redis.conf"
+uid=87
+owner="root"
+group="root"
+keys = [
+    "/containers",
+    "/services",
+    "/stacks",
+]
+

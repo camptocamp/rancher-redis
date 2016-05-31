@@ -1,0 +1,4 @@
+redis:
+  scale: 5
+redis-cluster:
+  scale: 1

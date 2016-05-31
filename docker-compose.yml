@@ -1,0 +1,17 @@
+redis:
+  image: redis:3.2.0
+  ports:
+   - 6379:6379
+
+redis-cluster:
+  image: clescot/rancher-redis:15
+
+  depends_on:
+    - redis
+
+webdis:
+  image: 'anapsix/webdis'
+  ports:
+   - '7379:7379'
+  links:
+   - 'redis'
