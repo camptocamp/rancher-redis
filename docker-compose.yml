@@ -1,17 +1,22 @@
 redis:
-  image: redis:3.2.0
+  image: clescot/rancher-redis:25
   ports:
    - 6379:6379
+  labels:
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+   
 
-redis-cluster:
-  image: clescot/rancher-redis:15
+#redis-sentinel:
+#  image: joshula/redis-sentinel
+#  ports:
+#   - 26379:26379
 
-  depends_on:
-    - redis
+
+
 
 webdis:
   image: 'anapsix/webdis'
   ports:
    - '7379:7379'
   links:
-   - 'redis'
+   - redis:redis

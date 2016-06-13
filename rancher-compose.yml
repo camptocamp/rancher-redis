@@ -1,4 +1,4 @@
 redis:
-  scale: 5
-redis-cluster:
+  scale: 3
+webdis:
   scale: 1
