@@ -1,4 +1,6 @@
 redis:
   scale: 3
+redis-data:
+  scale: 3
 webdis:
   scale: 1
