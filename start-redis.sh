@@ -14,6 +14,7 @@ echo "stack_name=$stack_name"
 echo "port=$port"
 
 sed -i s/%port%/$port/g /usr/local/etc/redis/redis.conf
+sed -i s/%my_ip%/$my_ip/g /usr/local/etc/redis/redis.conf
 
 if [ "$my_ip" == "$master_ip" ]
 then

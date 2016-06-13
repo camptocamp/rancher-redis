@@ -1,7 +1,7 @@
 redis:
-  image: clescot/rancher-redis:25
+  image: clescot/rancher-redis:27
   ports:
-   - 6379:6379
+   - "6379:6379"
   labels:
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
    
@@ -17,6 +17,6 @@ redis:
 webdis:
   image: 'anapsix/webdis'
   ports:
-   - '7379:7379'
+   - "7379:7379"
   links:
    - redis:redis
