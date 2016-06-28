@@ -18,12 +18,14 @@ redis-sentinel:
    - redis
 
 redis-data:
-  image: clescot/rancher-redis:28
+  tty: true
+  command:
+   - cat
+  image: clescot/rancher-redis:28  
+  stdin_open: true
+#  io.rancher.container.start_once: true
   volumes:
-  - /data
-  labels:
-    io.rancher.container.start_once: true
-
+   - /data
 #webdis:
 #  image: 'anapsix/webdis'
 #  ports:
