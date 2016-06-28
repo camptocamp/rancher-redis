@@ -4,9 +4,9 @@ redis:
    - "6379"
   labels:
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-#    io.rancher.sidekicks: redis-data
-#  volumes_from:
-#   - redis-data 
+    io.rancher.sidekicks: redis-data
+  volumes_from:
+   - redis-data 
 
 redis-sentinel:
   image: clescot/rancher-redis-sentinel:3
@@ -17,16 +17,12 @@ redis-sentinel:
   depends_on:
    - redis
 
-#redis-data:
-#  tty: true
-#  command:
-#  - cat
-#  image: clescot/rancher-redis:27
-#  stdin_open: true
-#  volumes:
-#  - /data
-#  labels:
-#    io.rancher.container.start_once: true
+redis-data:
+  image: clescot/rancher-redis:28
+  volumes:
+  - /data
+  labels:
+    io.rancher.container.start_once: true
 
 #webdis:
 #  image: 'anapsix/webdis'
