@@ -1,6 +1,8 @@
-redis:
-  scale: 3
-redis-sentinel:
-  scale: 3
-#webdis:
-#  scale: 1
+version: '2'
+services:
+
+  redis:
+    scale: 3
+
+  redis-sentinel:
+    scale: 3
