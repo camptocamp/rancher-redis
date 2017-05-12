@@ -9,7 +9,7 @@ services:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
 
   redis-sentinel:
-    image: clescot/rancher-redis-sentinel:3
+    image: camptocamp/rancher-redis-sentinel:3.2-1
     labels:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     depends_on:
