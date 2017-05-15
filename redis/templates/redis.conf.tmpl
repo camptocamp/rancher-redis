@@ -58,7 +58,7 @@
 # IF YOU ARE SURE YOU WANT YOUR INSTANCE TO LISTEN TO ALL THE INTERFACES
 # JUST COMMENT THE FOLLOWING LINE.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bind %my_ip%
+bind {{ getenv "MY_IP" }}
 
 # Protected mode is a layer of security protection, in order to avoid that
 # Redis instances left open on the internet are accessed and exploited.
@@ -1021,3 +1021,4 @@ hz 10
 # big latency spikes.
 aof-rewrite-incremental-fsync yes
 
+{{ getenv "SLAVEOF" }}
