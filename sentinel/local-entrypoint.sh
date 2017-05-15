@@ -8,17 +8,20 @@ function leader_ip {
 giddyup service wait scale --timeout 120
 
 stack_name=$(curl -s http://rancher-metadata/2016-07-29/self/stack/name)
-my_ip=$(giddyup ip myip)
-master_ip=$(leader_ip $stack_name "redis")
+export MY_IP=$(giddyup ip myip)
+
+while [ "$(leader_ip $stack_name "redis")" = "Not found" ]
+do
+  echo "Waiting for redis to start up"
+  sleep 0.1
+done
+export MASTER_IP=$(leader_ip $stack_name "redis")
 
 echo "stack_name=$stack_name"
-echo "my_ip=$my_ip"
-echo "master_ip=$master_ip"
+echo "my_ip=$MY_IP"
+echo "master_ip=$MASTER_IP"
 
-sed -i s/%master_ip%/$master_ip/g /etc/redis/sentinel.conf
-sed -i s/%my_ip%/$my_ip/g /etc/redis/sentinel.conf
-sed -i s/%sentinel_quorum%/$SENTINEL_QUORUM/g /etc/redis/sentinel.conf
-sed -i s/%sentinel_down_after%/$SENTINEL_DOWN_AFTER/g /etc/redis/sentinel.conf
-sed -i s/%sentinel_failover%/$SENTINEL_FAILOVER/g /etc/redis/sentinel.conf
+confd -onetime -backend env
+chown redis:redis /usr/local/etc/redis/sentinel.conf
 
-exec docker-entrypoint.sh redis-server /etc/redis/sentinel.conf --sentinel
+exec docker-entrypoint.sh redis-server /usr/local/etc/redis/sentinel.conf --sentinel

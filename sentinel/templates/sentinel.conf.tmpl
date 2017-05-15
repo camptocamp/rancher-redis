@@ -4,7 +4,7 @@
 # The port that this sentinel instance will run on
 port 26379
 
-sentinel announce-ip %my_ip%
+sentinel announce-ip {{ getenv "MY_IP" }}
 sentinel announce-port 26379
 
 #
@@ -51,7 +51,7 @@ dir /tmp
 #
 # Note: master name should not include special characters or spaces.
 # The valid charset is A-z 0-9 and the three characters ".-_".
-sentinel monitor mymaster %master_ip% 6379 %sentinel_quorum%
+sentinel monitor mymaster {{ getenv "MASTER_IP" }} 6379 {{ getenv "SENTINEL_QUORUM" }}
 
 # sentinel auth-pass <master-name> <password>
 #
@@ -80,7 +80,7 @@ sentinel monitor mymaster %master_ip% 6379 %sentinel_quorum%
 # Down).
 #
 # Default is 30 seconds.
-sentinel down-after-milliseconds mymaster %sentinel_down_after%
+sentinel down-after-milliseconds mymaster {{ getenv "SENTINEL_DOWN_AFTER" }}
 
 # sentinel parallel-syncs <master-name> <numslaves>
 #
@@ -113,7 +113,7 @@ sentinel parallel-syncs mymaster 1
 #   the exact parallel-syncs progression as specified.
 #
 # Default is 3 minutes.
-sentinel failover-timeout mymaster %sentinel_failover%
+sentinel failover-timeout mymaster {{ getenv "SENTINEL_FAILOVER" }}
 
 # SCRIPTS EXECUTION
 #
@@ -178,6 +178,3 @@ sentinel failover-timeout mymaster %sentinel_failover%
 # Example:
 #
 # sentinel client-reconfig-script mymaster /var/redis/reconfig.sh
-
-
-
