@@ -29,8 +29,9 @@ They can be customized in the
 
 ## Master
 
-The Redis master is automatically attributed at the start of the containers.
-The slaves and sentinels are automatically registered on this master.
+The container with the Rancher Primary IP is automatically set as Redis Master,
+while the others will subscribe on it as `slaveof`.  The sentinels are
+automatically registered on this master.
 
 If the master container is deleted at some point (IP address changed), you
 might need to elect manually the new master with the special `SENTINEL`
