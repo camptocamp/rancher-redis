@@ -19,7 +19,7 @@ The default values of the environment variables for the Sentinel are as followin
 * SENTINEL_DOWN_AFTER: 30000
 * SENTINEL_FAILOVER: 180000
 
-They can be customized in the 
+They can be customized in the `docker-compose.yml` environment section.
 
 ## Scaling
 
