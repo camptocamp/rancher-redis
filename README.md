@@ -1,3 +1,5 @@
+Note: do not use in production. The stack does not failover correctly, we might work on it later.
+
 # Redis Sentinel stack for Rancher
 
 Allow to setup a Redis + Sentinel Stack on Rancher.
