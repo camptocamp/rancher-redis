@@ -2,14 +2,14 @@ version: '2'
 services:
 
   redis:
-    image: camptocamp/rancher-redis:3.2-1
+    image: camptocamp/rancher-redis:3.2-2
     volumes:
       - redis-data:/data
     labels:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
 
   redis-sentinel:
-    image: camptocamp/rancher-redis-sentinel:3.2-1
+    image: camptocamp/rancher-redis-sentinel:3.2-2
     labels:
       io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     depends_on:
