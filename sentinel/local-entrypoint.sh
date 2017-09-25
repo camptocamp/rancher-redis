@@ -32,7 +32,7 @@ for container_output in $containers; do
   fi
 done
 
-if [ -z "${master}" ]; then
+if [ -n "${master}" ]; then
   export MASTER_IP=$master
 else
   export MASTER_IP=$(leader_ip $stack_name "redis")
