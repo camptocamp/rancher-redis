@@ -1,5 +1,3 @@
-Note: do not use in production. The stack does not failover correctly, we might work on it later.
-
 # Redis Sentinel stack for Rancher
 
 Allow to setup a Redis + Sentinel Stack on Rancher.
@@ -42,3 +40,5 @@ commands: `SENTINEL MONITOR mymaster <ip> <port> <quorum>`.
 ## Notes
 
 * You need Sentinel support in your client library.
+* Do not setup the healthchecks with automatic re-create to avoid having the IP addresses changing
+* Prefer to use the "keep ip address" for rancher containers
