@@ -15,17 +15,21 @@ The ports used by the containers are:
 
 The default values of the environment variables for the Sentinel are as following
 
-* SENTINEL_QUORUM: 2
-* SENTINEL_DOWN_AFTER: 30000
-* SENTINEL_FAILOVER: 180000
+* SENTINEL_QUORUM: 2 (Decides how many sentinel instances need to be up and have to agree.
+This number must be lower than the amount of sentinels started.)
+* SENTINEL_DOWN_AFTER: 30000 (How long should a master be down till it is considered as Subjectively Down)
+* SENTINEL_FAILOVER: 180000 (Used as a delay for a Sentinel that tried to failover a master, but was voted against to try again immediately. Also used as a max time to acknowledge the replica as new master. Otherwise the failover will be canceled.)
 
 They can be customized in the `docker-compose.yml` environment section.
 
 ## Scaling
 
 * You must have at least 2 Redis instances on different hosts and 3 Sentinel on
-  different hosts. This is required by the Sentinel design (see why on
-  https://redis.io/topics/sentinel)
+  different hosts. This is required by the Sentinel design.
+  The two redis instances are needed to of course get a failover in case one of those goes down.
+  The three sentinel instances are needed because they need to agree on which redis instance to use. If we only have two we can't decide which instance has gone down.
+  (for more details: see -> https://redis.io/topics/sentinel)
+* The default rancher configurations in this project will create 3 redis container and 3 sentinel containers.
 
 ## Master
 
