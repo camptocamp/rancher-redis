@@ -42,3 +42,7 @@ commands: `SENTINEL MONITOR mymaster <ip> <port> <quorum>`.
 * You need Sentinel support in your client library.
 * Do not setup the healthchecks with automatic re-create to avoid having the IP addresses changing
 * Prefer to use the "keep ip address" for rancher containers
+
+## Credits
+
+Credits to https://github.com/clescot/rancher-redis which was a great starting point for this stack.
